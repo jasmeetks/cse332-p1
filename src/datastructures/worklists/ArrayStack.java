@@ -10,6 +10,7 @@ import cse332.interfaces.worklists.LIFOWorkList;
 public class ArrayStack<E> extends LIFOWorkList<E> {
 
     public ArrayStack() {
+    	// TODO: Start here.
         throw new NotYetImplementedException();
     }
 
