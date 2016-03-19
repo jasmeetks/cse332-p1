@@ -1,5 +1,7 @@
 package datastructures.worklists;
 
+import java.util.NoSuchElementException;
+
 import cse332.exceptions.NotYetImplementedException;
 import cse332.interfaces.worklists.LIFOWorkList;
 
@@ -8,34 +10,56 @@ import cse332.interfaces.worklists.LIFOWorkList;
  * for method specifications.
  */
 public class ArrayStack<E> extends LIFOWorkList<E> {
-
-    public ArrayStack() {
-    	// TODO: Start here.
-        throw new NotYetImplementedException();
-    }
+	E[] data;
+	int size;
+	
+    @SuppressWarnings("unchecked")
+	public ArrayStack() {
+    	this.data = (E[]) new Object[10];
+    	this.size = 0;
+	}
 
     @Override
     public void add(E work) {
-        throw new NotYetImplementedException();
+        if (this.size == this.data.length) {
+        	growArray();
+        }
+        data[size] = work;
+        size++;
     }
 
     @Override
     public E peek() {
-        throw new NotYetImplementedException();
+    	if (this.hasWork() == false) {
+    		throw new NoSuchElementException();
+    	}
+    	return data[size - 1];
     }
 
     @Override
     public E next() {
-        throw new NotYetImplementedException();
+    	if (this.hasWork() == false) {
+    		throw new NoSuchElementException();
+    	}
+    	return data[size-- - 1];
     }
 
     @Override
     public int size() {
-        throw new NotYetImplementedException();
+        return this.size;
     }
 
     @Override
     public void clear() {
-        throw new NotYetImplementedException();
+        this.size = 0;
+    }
+    
+    @SuppressWarnings("unchecked")
+	private void growArray() {
+    	E[] newData = (E[]) new Object[2*data.length];
+    	for (int i = 0; i < data.length; i++) {
+    		newData[i] = data[i];
+    	}
+    	data = newData;
     }
 }
